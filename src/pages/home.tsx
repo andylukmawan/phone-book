@@ -1,8 +1,11 @@
 import { css } from "@emotion/react";
-import ContactList from "./components/ContactList";
-import Header from "./components/Header";
+import { useNavigate } from "react-router-dom";
+import ContactList from "../components/ContactList";
+import Header from "../components/Header";
 
-function App() {
+export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Header
@@ -11,12 +14,12 @@ function App() {
           {
             title: "Search",
             iconName: "search",
-            onClick: () => console.log("search"),
+            onClick: () => navigate("search"),
           },
           {
             title: "Create",
             iconName: "library_add",
-            onClick: () => console.log("create"),
+            onClick: () => navigate("form"),
           },
         ]}
       />
@@ -25,5 +28,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 import { colors } from "../helper/colors";
 import { sizes } from "../helper/sizes";
 import { Icons } from "../helper/types";
@@ -92,6 +93,7 @@ const buttonContainer = css`
 `;
 
 const button = css`
+  text-decoration: none;
   background-color: ${colors.primaryGreen};
   display: flex;
   align-items: center;

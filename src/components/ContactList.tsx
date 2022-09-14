@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 import { colors } from "../helper/colors";
 import { sizes } from "../helper/sizes";
 
@@ -13,10 +14,10 @@ export default function ContactList() {
       <ul>
         {data.map((item) => (
           <li key={item.id}>
-            <div>
+            <Link to={item.id.toString()} css={info}>
               <h2 css={fullName}>{item.name}</h2>
               <h3 css={phoneNumber}>{item.phone}</h3>
-            </div>
+            </Link>
             <div css={buttonContainer}>
               <button css={button}>
                 <span
@@ -56,10 +57,10 @@ const container = css`
   }
 
   li {
-    list-style-type: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    list-style-type: none;
     border-bottom: 1px solid lightgray;
     margin: 4px 0;
     padding: 8px;
@@ -76,10 +77,16 @@ const container = css`
   }
 `;
 
+const info = css`
+  all: unset;
+  flex: 1;
+`;
+
 const fullName = css`
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 4px;
+  cursor: pointer;
 
   @media (min-width: ${maxWidth}px) {
     font-size: 21px;
@@ -90,6 +97,7 @@ const fullName = css`
 const phoneNumber = css`
   font-size: 16px;
   font-weight: normal;
+  cursor: pointer;
 
   @media (min-width: ${maxWidth}px) {
     font-size: 18px;
