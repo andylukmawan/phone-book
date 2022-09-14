@@ -7,6 +7,8 @@ import Home from "./pages/home";
 import Contact from "./pages/contact";
 import Search from "./pages/search";
 import Form from "./pages/form";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./helper/client";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -15,9 +17,15 @@ const router = createBrowserRouter([
   { path: "form", element: <Form /> },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
+root.render(
   <React.StrictMode>
-    <Global styles={styles} />
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <Global styles={styles} />
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );

@@ -1,25 +1,52 @@
+import { useQuery } from "@apollo/client";
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { colors } from "../helper/colors";
+import { Contact } from "../helper/interfaces";
+import { GET_CONTACT_LIST } from "../helper/queries.gql";
 import { sizes } from "../helper/sizes";
 
-const data = [
-  { id: 1, name: "John Doe", phone: "+62812 8944 0694", favorited: true },
-  { id: 2, name: "Doe John", phone: "+62813 1234 5679", favorited: false },
-];
+interface ContactData {
+  contact: Contact[];
+}
+
+interface ContactVars {
+  limit: number;
+  offset: number;
+}
+
+const deleteContact = (name: string) => {
+  if (confirm(`Are you sure to delete ${name} from contact?`)) {
+    console.log(name);
+  }
+};
 
 export default function ContactList() {
+  const { loading, error, data } = useQuery<ContactData, Partial<ContactVars>>(
+    GET_CONTACT_LIST,
+    {
+      variables: {
+        limit: 10,
+      },
+    }
+  );
+
+  if (loading) return <p css={container}>Loading...</p>;
+  if (error) return <p css={container}>Error: {error.message}</p>;
+
   return (
     <div css={container}>
       <ul>
-        {data.map((item) => (
+        {data?.contact.map((item: Contact) => (
           <li key={item.id}>
             <Link to={item.id.toString()} css={info}>
-              <h2 css={fullName}>{item.name}</h2>
-              <h3 css={phoneNumber}>{item.phone}</h3>
+              <h2 css={fullName}>
+                {item.first_name} {item.last_name}
+              </h2>
+              <h3 css={phoneNumber}>{item.phones[0].number}</h3>
             </Link>
             <div css={buttonContainer}>
-              <button css={button}>
+              {/* <button css={button}>
                 <span
                   className="material-symbols-outlined"
                   css={css`
@@ -29,8 +56,13 @@ export default function ContactList() {
                   favorite
                 </span>
                 <h4>Favorite</h4>
-              </button>
-              <button css={button}>
+              </button> */}
+              <button
+                css={button}
+                onClick={() =>
+                  deleteContact(`${item.first_name} ${item.last_name}`)
+                }
+              >
                 <span className="material-symbols-outlined">delete</span>
                 <h4>Delete</h4>
               </button>
