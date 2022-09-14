@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { colors } from "../helper/colors";
+import { sizes } from "../helper/sizes";
 import { Icons } from "../helper/types";
 
 interface HeaderProps {
@@ -43,7 +44,7 @@ export default function Header({ title = "Title", rightButton }: HeaderProps) {
 
 // styles
 
-const maxWidth = 800;
+const { maxWidth } = sizes;
 
 const header = css`
   background-color: #03ac0e;
@@ -55,7 +56,6 @@ const header = css`
   }
 
   .material-symbols-outlined {
-    /* font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48; */
     color: #fff;
   }
 `;
@@ -92,7 +92,6 @@ const buttonContainer = css`
 `;
 
 const button = css`
-  all: unset;
   background-color: ${colors.primaryGreen};
   display: flex;
   align-items: center;

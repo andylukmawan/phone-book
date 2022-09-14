@@ -22,4 +22,8 @@ export const styles = css`
     box-sizing: border-box;
     font-family: "Open Sauce One", sans-serif;
   }
+
+  button {
+    all: unset;
+  }
 `;

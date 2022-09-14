@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import ContactList from "./components/ContactList";
 import Header from "./components/Header";
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
           },
         ]}
       />
+
+      <ContactList />
     </div>
   );
 }
