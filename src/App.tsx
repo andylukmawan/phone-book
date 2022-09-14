@@ -1,13 +1,26 @@
-import { css } from "@emotion/react"
+import { css } from "@emotion/react";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
-      <h1 css={css`font-weight: normal`}>Phone Book</h1>
-      <h1 css={css`font-weight: 500`}>Phone Book</h1>
-      <h1 css={css`font-weight: bold`}>Phone Book</h1>
+      <Header
+        title="Phone Book"
+        rightButton={[
+          {
+            title: "Search",
+            iconName: "search",
+            onClick: () => console.log("search"),
+          },
+          {
+            title: "Create",
+            iconName: "library_add",
+            onClick: () => console.log("create"),
+          },
+        ]}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
